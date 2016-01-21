@@ -537,3 +537,39 @@ module.exports = {
 │       └── stylesheets
 └── webpack.config.js
 ```
+
+# Export function + Export to global
+
+src/assets/javascripts/application.js
+
+```
+'use strict';
+
+let log = require('./components/log');
+
+// EXPORT to Global
+window.log = log;
+
+// EXPORT to common var
+exports.log = log;
+```
+
+webpack.config.js
+
+```
+'use strict';
+
+module.exports = {
+  // the base path which will be used to resolve entry points
+  context: __dirname + '/src/assets',
+  entry: {
+    application: './javascripts/application.js'
+  },
+
+  output: {
+    path: __dirname + '/public/assets',
+    filename: "./javascripts/[name].js",
+    library: 'app'
+  }
+}
+```

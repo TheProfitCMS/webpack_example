@@ -2,4 +2,8 @@
 
 let log = require('./components/log');
 
-log('Hello World!');
+// EXPORT to Global
+window.log = log;
+
+// EXPORT to common var
+exports.log = log;

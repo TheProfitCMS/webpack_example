@@ -9,6 +9,7 @@ module.exports = {
 
   output: {
     path: __dirname + '/public/assets',
-    filename: "./javascripts/[name].js"
+    filename: "./javascripts/[name].js",
+    library: 'app'
   }
 }

@@ -1,3 +1,4 @@
+var app =
 /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -48,7 +49,11 @@
 
 	let log = __webpack_require__(1);
 
-	log('Hello World!');
+	// EXPORT to Global
+	window.log = log;
+
+	// EXPORT to common var
+	exports.log = log;
 
 /***/ },
 /* 1 */
