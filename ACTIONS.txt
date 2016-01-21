@@ -448,3 +448,92 @@ webpack
 │       └── stylesheets
 └── webpack.config.js
 ```
+
+### 3
+
+google:// webpack config output
+>> https://webpack.github.io/docs/configuration.html#output-path
+
+> output.path
+> The output directory as absolute path (required).
+
+webpack.config.js
+
+```
+'use strict';
+
+module.exports = {
+  // the base path which will be used to resolve entry points
+  context: __dirname + '/src/assets',
+  entry: './javascripts/app.js',
+
+  output: {
+    path: __dirname + '/public/assets',
+    filename: './javascripts/application.js'
+  }
+}
+```
+
+webpack.config.js
+
+```
+'use strict';
+
+module.exports = {
+  // the base path which will be used to resolve entry points
+  context: __dirname + '/src/assets',
+  entry: {
+    app: './javascripts/app.js'
+  },
+
+  output: {
+    path: __dirname + '/public/assets',
+    filename: "./javascripts/[name].js"
+  }
+}
+```
+
+```
+public/assets/
+└── javascripts
+    ├── app.js
+    └── application.js
+```
+
+rm public/assets/javascripts/app.js
+mv src/assets/javascripts/app.js src/assets/javascripts/application.js
+
+```
+'use strict';
+
+module.exports = {
+  // the base path which will be used to resolve entry points
+  context: __dirname + '/src/assets',
+  entry: {
+    application: './javascripts/application.js'
+  },
+
+  output: {
+    path: __dirname + '/public/assets',
+    filename: "./javascripts/[name].js"
+  }
+}
+```
+
+```
+├── ACTIONS.txt
+├── public
+│   ├── assets
+│   │   └── javascripts
+│   │       └── application.js
+│   └── index.html
+├── src
+│   └── assets
+│       ├── images
+│       ├── javascripts
+│       │   ├── application.js
+│       │   └── components
+│       │       └── log.js
+│       └── stylesheets
+└── webpack.config.js
+```
