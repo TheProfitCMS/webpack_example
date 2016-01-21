@@ -1,0 +1,27 @@
+{
+  "name": "webpack_example",
+  "version": "1.0.0",
+  "description": "webpack example",
+  "main": "webpack.config.js",
+  "dependencies": {
+    "webpack": "^1.12.11"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TheProfitCMS/webpack_example.git"
+  },
+  "keywords": [
+    "webpack",
+    "example"
+  ],
+  "author": "Ilya N. Zykin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/TheProfitCMS/webpack_example/issues"
+  },
+  "homepage": "https://github.com/TheProfitCMS/webpack_example#readme"
+}

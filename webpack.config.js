@@ -9,6 +9,8 @@ console.log(`DEV MODE => ${ DEV_MODE }`);
 // cheap-inline-module-source-map | source-map
 const SOURCE_MAP_TYPE = DEV_MODE ? 'source-map' : null;
 
+const webpack = require('webpack');
+
 module.exports = {
   watch: DEV_MODE,
 
@@ -28,5 +30,12 @@ module.exports = {
     path: __dirname + '/public/assets',
     filename: "./javascripts/[name].js",
     library: 'app'
-  }
+  },
+
+  plugins: [
+    new webpack.DefinePlugin({
+      NODE_ENV: JSON.stringify(NODE_ENV),
+      DEV_MODE: DEV_MODE
+    })
+  ]
 }

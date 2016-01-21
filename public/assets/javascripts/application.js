@@ -52,7 +52,10 @@ var app =
 	// EXPORT to Global
 	window.log = log;
 
-	log("Hello World!");
+
+	if(false){
+	  log("Hello World!");
+	}
 
 	// EXPORT to common var
 	exports.log = log;
@@ -65,7 +68,7 @@ var app =
 
 	module.exports = function() {
 	  try {
-	    debugger;
+	    // debugger;
 	    return console.log.apply(console, arguments);
 	  } catch (_error) {}
 	};
