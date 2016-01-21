@@ -269,3 +269,182 @@ usr/local/lib
       └── amdefine@1.0.0
 ================================
 
+touch index.html
+
+```
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Webpack Example</title>
+    <meta charset="utf-8">
+    <script src='application.js'></script>
+  </head>
+  <body>
+    WebPack example
+  </body>
+</html>
+```
+
+touch log.js
+
+```
+'use strict';
+
+window.log = function() {
+  try {
+    return console.log.apply(console, arguments);
+  } catch (_error) {}
+};
+```
+
+touch app.js
+
+```
+'use strict';
+
+let log = require('./log');
+
+log('Hello World!');
+```
+
+touch webpack.config.js
+
+```
+'use strict';
+
+module.exports = {
+  entry: './app.js',
+  output: {
+    filename: 'application.js'
+  }
+}
+```
+
+(!) let not work in Firefox
+
+SyntaxError: let is a reserved identifier
+let log = __webpack_require__(1);
+application.js (line 49, col 1)
+
+index.html
+
+```
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Webpack Example</title>
+    <meta charset="utf-8">
+    <script src='application.js' type="application/javascript;version=1.7"></script>
+  </head>
+  <body>
+    WebPack example
+  </body>
+</html>
+```
+
+touch app.js
+
+```
+'use strict';
+log = require('./log');
+log('Hello World!');
+```
+
+ReferenceError: assignment to undeclared variable log
+
+### Преобразование файловой структуры
+
+===
+
+mkdir src
+mkdir src/assets
+mkdir src/assets/images
+mkdir src/assets/stylesheets
+mkdir src/assets/javascripts
+mkdir src/assets/javascripts/components
+
+touch src/assets/images/.keep
+touch src/assets/javascripts/.keep
+touch src/assets/stylesheets/.keep
+touch src/assets/javascripts/components/.keep
+
+mkdir public
+mv index.html public/index.html
+
+rm application.js
+mv app.js src/assets/javascripts/
+mv log.js src/assets/javascripts/components/
+
+```
+├── ACTIONS.txt
+├── public
+│   └── index.html
+├── src
+│   └── assets
+│       ├── images
+│       ├── javascripts
+│       │   ├── app.js
+│       │   └── components
+│       │       └── log.js
+│       └── stylesheets
+└── webpack.config.js
+```
+
+src/assets/javascripts/app.js
+
+```
+'use strict';
+let log = require('./components/log');
+log('Hello World!');
+```
+
+webpack.config.js
+
+```
+'use strict';
+
+module.exports = {
+  // the base path which will be used to resolve entry points
+  context: __dirname + '/src/assets',
+  entry: './javascripts/app.js',
+
+  output: {
+    filename: './public/assets/javascripts/application.js'
+  }
+}
+```
+
+public/index.html
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Webpack Example</title>
+    <meta charset="utf-8">
+    <script src='assets/javascripts/application.js' type="application/javascript;version=1.7"></script>
+  </head>
+  <body>
+    WebPack example
+  </body>
+</html>
+```
+
+webpack
+
+```
+├── ACTIONS.txt
+├── public
+│   ├── assets
+│   │   └── javascripts
+│   │       └── application.js
+│   └── index.html
+├── src
+│   └── assets
+│       ├── images
+│       ├── javascripts
+│       │   ├── app.js
+│       │   └── components
+│       │       └── log.js
+│       └── stylesheets
+└── webpack.config.js
+```
