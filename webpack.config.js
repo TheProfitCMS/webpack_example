@@ -2,7 +2,7 @@
 
 module.exports = {
   // the base path which will be used to resolve entry points
-  context: __dirname + '/src/assets',
+  context: __dirname + '/__src/assets',
   entry: {
     application: './javascripts/application.js'
   },
