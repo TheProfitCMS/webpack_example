@@ -22,6 +22,7 @@ module.exports = {
 
   // the base path which will be used to resolve entry points
   context: __dirname + '/__src/assets',
+
   entry: {
     application: './javascripts/application.js'
   },
@@ -37,5 +38,16 @@ module.exports = {
       NODE_ENV: JSON.stringify(NODE_ENV),
       DEV_MODE: DEV_MODE
     })
-  ]
+  ],
+
+  module: {
+    loaders: [{
+      test: /\.jsx?$/,
+      exclude: /(node_modules|bower_components)/,
+      loader: 'babel', // 'babel-loader' is also a legal name to reference
+      query: {
+        presets: ['react', 'es2015']
+      }
+    }]
+  }
 }
