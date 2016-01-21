@@ -616,3 +616,47 @@ module.exports = {
 │   └── index.html
 └── webpack.config.js
 ```
+
+# WATCH
+
+```
+'use strict';
+
+module.exports = {
+  watch: true,
+
+  watchOptions: {
+    aggregateTimeout: 100
+  },
+
+  // the base path which will be used to resolve entry points
+  context: __dirname + '/__src/assets',
+  entry: {
+    application: './javascripts/application.js'
+  },
+
+  output: {
+    path: __dirname + '/public/assets',
+    filename: "./javascripts/[name].js",
+    library: 'app'
+  }
+}
+```
+
+```
+Hash: 32eb852415e7dff99e79
+Version: webpack 1.12.11
+Time: 63ms
+                       Asset     Size  Chunks             Chunk Names
+./javascripts/application.js  1.74 kB       0  [emitted]  application
+   [0] ./javascripts/application.js 136 bytes {0} [built]
+    + 1 hidden modules
+
+Hash: ff924e84cc760d895e9c
+Version: webpack 1.12.11
+Time: 19ms
+                       Asset     Size  Chunks             Chunk Names
+./javascripts/application.js  1.76 kB       0  [emitted]  application
+   [0] ./javascripts/application.js 158 bytes {0} [built]
+    + 1 hidden modules
+```

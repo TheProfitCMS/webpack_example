@@ -52,6 +52,8 @@ var app =
 	// EXPORT to Global
 	window.log = log;
 
+	log("Hello World!");
+
 	// EXPORT to common var
 	exports.log = log;
 
