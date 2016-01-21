@@ -3,8 +3,14 @@
 const NODE_ENV = process.env.NODE_ENV || 'development';
 console.log(`NODE ENV => ${ NODE_ENV }`);
 
+// $ webpack
+// $ NODE_ENV=development webpack
 const DEV_MODE = NODE_ENV == 'development';
 console.log(`DEV MODE => ${ DEV_MODE }`);
+
+// $ NODE_ENV=production webpack
+const PROD_MODE = NODE_ENV == 'production';
+console.log(`PROD MODE => ${ PROD_MODE }`);
 
 // cheap-inline-module-source-map | source-map
 const SOURCE_MAP_TYPE = DEV_MODE ? 'source-map' : null;
@@ -44,10 +50,21 @@ module.exports = {
     loaders: [{
       test: /\.jsx?$/,
       exclude: /(node_modules|bower_components)/,
-      loader: 'babel', // 'babel-loader' is also a legal name to reference
+      loader: 'babel',
       query: {
-        presets: ['react', 'es2015']
+        presets: ['react', 'es2015'],
+        plugins: ['transform-runtime']
       }
     }]
   }
+}
+
+if(PROD_MODE){
+ module.exports.plugins.push(
+  new webpack.optimize.UglifyJsPlugin({
+    compress: {
+      warnings: true
+    }
+  })
+ );
 }
