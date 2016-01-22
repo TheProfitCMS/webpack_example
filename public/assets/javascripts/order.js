@@ -1,1 +1,1 @@
-var APP=webpackJsonpAPP([1],[function(e,t,u){"use strict";function n(e){return e&&e.__esModule?e:{"default":e}}var o=u(1),a=n(o),l=u(4);n(l);window.log=a["default"],t.log=a["default"]}]);
+var APP=webpackJsonpAPP([1],[function(e,t,u){"use strict";function n(e){return e&&e.__esModule?e:{"default":e}}var o=u(1),a=n(o),d=u(4),l=n(d);window.$=l["default"],window.log=a["default"],t.log=a["default"]}]);

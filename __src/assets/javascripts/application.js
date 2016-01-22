@@ -1,26 +1,20 @@
 'use strict';
 
-window.$ = require('jquery');
-
 // let log = require('./components/log');
-import log from './components/log';
-
-// EXPORT to Global
-window.log = log;
-
-if( DEV_MODE ){
-  log("Hello World!")
-}
-
 // let Polygon = require('./components/polygon_class');
+import log from './components/log';
 import Polygon from './components/polygon_class';
 
+// EXPORT to Global
+window.log     = log;
 window.Polygon = Polygon;
-
-if( DEV_MODE ){
-  log( Polygon )
-}
+window.$       = require('jquery');
 
 // EXPORT to common var APP
 exports.log     = log;
 exports.Polygon = Polygon;
+
+if( DEV_MODE ){
+  log("Hello World!")
+  log( Polygon )
+}
