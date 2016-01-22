@@ -1,12 +1,14 @@
 'use strict';
 
+window.$ = require('jquery');
+
 // let log = require('./components/log');
 import log from './components/log';
 
 // EXPORT to Global
 window.log = log;
 
-if(DEV_MODE){
+if( DEV_MODE ){
   log("Hello World!")
 }
 

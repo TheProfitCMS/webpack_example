@@ -1320,3 +1320,76 @@ https://github.com/webpack/webpack/tree/master/examples
   </body>
 </html>
 ```
+
+### BOWER AND JQuery
+
+npm install -g bower
+npm install bower --save
+bower install jquery#2.2.0 --save
+bower init
+
+echo "bower_components" >> .gitignore
+
+cat bower_components/jquery/bower.json | grep main
+> dist/jquery.js
+
+head bower_components/jquery/dist/jquery.js
+
+```
+  resolve: {
+    alias: {
+      jquery: __dirname + "/bower_components/jquery/dist/jquery.js"
+    }
+  },
+```
+
+```
+'use strict';
+
+window.$ = require('jquery');
+
+// let log = require('./components/log');
+import log from './components/log';
+
+// EXPORT to Global
+window.log = log;
+
+if(DEV_MODE){
+  log("Hello World!")
+}
+
+// let Polygon = require('./components/polygon_class');
+import Polygon from './components/polygon_class';
+
+window.Polygon = Polygon;
+
+if( DEV_MODE ){
+  log( Polygon )
+}
+
+// EXPORT to common var APP
+exports.log     = log;
+exports.Polygon = Polygon;
+```
+
+```
+'use strict';
+
+import log from './components/log';
+
+import $ from 'jquery';
+window.$ = $;
+
+// window.$ = require('jquery');
+
+// EXPORT to Global
+// EXPORT to common var APP
+window.log  = log;
+exports.log = log;
+
+if(DEV_MODE){
+  log("ORDER PAGE!")
+}
+```
+
+$.fn.jquery

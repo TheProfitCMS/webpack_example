@@ -1,0 +1,25 @@
+{
+  "name": "webpack_example",
+  "description": "webpack example",
+  "main": "webpack.config.js",
+  "authors": [
+    "Ilya N. Zykin"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "webpack",
+    "example"
+  ],
+  "homepage": "https://github.com/TheProfitCMS/webpack_example",
+  "moduleType": [],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "2.2.0"
+  }
+}

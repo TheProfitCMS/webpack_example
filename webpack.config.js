@@ -56,6 +56,12 @@ module.exports = {
     })
   ],
 
+  resolve: {
+    alias: {
+      jquery: __dirname + "/bower_components/jquery/dist/jquery.js"
+    }
+  },
+
   module: {
     loaders: [{
       test: /\.jsx?$/,

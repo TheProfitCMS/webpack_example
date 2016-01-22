@@ -2,6 +2,11 @@
 
 import log from './components/log';
 
+import $ from 'jquery';
+window.$ = $;
+
+// window.$ = require('jquery');
+
 // EXPORT to Global
 // EXPORT to common var APP
 window.log  = log;
