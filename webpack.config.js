@@ -43,6 +43,13 @@ module.exports = {
   },
 
   plugins: [
+    new webpack.optimize.DedupePlugin(),
+
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'app-common',
+      chanks: ['application', 'order']
+    }),
+
     new webpack.DefinePlugin({
       NODE_ENV: JSON.stringify(NODE_ENV),
       DEV_MODE: DEV_MODE

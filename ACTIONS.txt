@@ -1271,3 +1271,52 @@ if(PROD_MODE){
 }
 ```
 
+### COMMON CHANKS and Optimization
+
+https://github.com/webpack/webpack/tree/master/examples
+
+```
+  plugins: [
+    new webpack.optimize.DedupePlugin(),
+
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'app-common',
+      chanks: ['application', 'order']
+    }),
+
+    new webpack.DefinePlugin({
+      NODE_ENV: JSON.stringify(NODE_ENV),
+      DEV_MODE: DEV_MODE
+    })
+  ],
+```
+
+```
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Webpack Example</title>
+    <meta charset="utf-8">
+    <script src='assets/javascripts/app-common.js' type="application/javascript;version=1.7"></script>
+    <script src='assets/javascripts/order.js'  type="application/javascript;version=1.7"></script>
+  </head>
+  <body>
+    WebPack example :: ORDER PAGE
+  </body>
+</html>
+```
+
+```
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Webpack Example</title>
+    <meta charset="utf-8">
+    <script src='assets/javascripts/app-common.js' type="application/javascript;version=1.7"></script>
+    <script src='assets/javascripts/order.js'  type="application/javascript;version=1.7"></script>
+  </head>
+  <body>
+    WebPack example :: ORDER PAGE
+  </body>
+</html>
+```

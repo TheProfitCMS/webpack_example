@@ -1,1 +1,25 @@
-var APP=function(e){function t(o){if(r[o])return r[o].exports;var n=r[o]={exports:{},id:o,loaded:!1};return e[o].call(n.exports,n,n.exports,t),n.loaded=!0,n.exports}var r={};return t.m=e,t.c=r,t.p="",t(0)}([function(e,t,r){"use strict";function o(e){return e&&e.__esModule?e:{"default":e}}var n=r(1),u=o(n);window.log=u["default"],t.log=u["default"]},function(e,t){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var r=function(){try{return console.log.apply(console,arguments)}catch(e){}};t["default"]=r}]);
+var APP =
+webpackJsonpAPP([1],[
+/* 0 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _log = __webpack_require__(1);
+	
+	var _log2 = _interopRequireDefault(_log);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	// EXPORT to Global
+	// EXPORT to common var APP
+	window.log = _log2.default;
+	exports.log = _log2.default;
+	
+	if (true) {
+	  (0, _log2.default)("ORDER PAGE!");
+	}
+
+/***/ }
+]);
+//# sourceMappingURL=order.js.map

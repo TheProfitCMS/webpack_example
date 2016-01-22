@@ -1,1 +1,83 @@
-var APP=function(t){function e(o){if(n[o])return n[o].exports;var u=n[o]={exports:{},id:o,loaded:!1};return t[o].call(u.exports,u,u.exports,e),u.loaded=!0,u.exports}var n={};return e.m=t,e.c=n,e.p="",e(0)}([function(t,e,n){"use strict";function o(t){return t&&t.__esModule?t:{"default":t}}var u=n(1),r=o(u),a=n(2),l=o(a);window.log=r["default"],window.Polygon=l["default"],e.log=r["default"],e.Polygon=l["default"]},function(t,e){"use strict";Object.defineProperty(e,"__esModule",{value:!0});var n=function(){try{return console.log.apply(console,arguments)}catch(t){}};e["default"]=n},function(t,e,n){"use strict";function o(t){return t&&t.__esModule?t:{"default":t}}var u=n(3),r=o(u);Object.defineProperty(e,"__esModule",{value:!0});var a=function l(t,e){(0,r["default"])(this,l),this.height=t,this.width=e};e["default"]=a},function(t,e){"use strict";e.__esModule=!0,e["default"]=function(t,e){if(!(t instanceof e))throw new TypeError("Cannot call a class as a function")}}]);
+var APP =
+webpackJsonpAPP([0],[
+/* 0 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	// let log = require('./components/log');
+	
+	var _log = __webpack_require__(1);
+	
+	var _log2 = _interopRequireDefault(_log);
+	
+	var _polygon_class = __webpack_require__(2);
+	
+	var _polygon_class2 = _interopRequireDefault(_polygon_class);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	// EXPORT to Global
+	window.log = _log2.default;
+	
+	if (true) {
+	  (0, _log2.default)("Hello World!");
+	}
+	
+	// let Polygon = require('./components/polygon_class');
+	
+	window.Polygon = _polygon_class2.default;
+	
+	if (true) {
+	  (0, _log2.default)(_polygon_class2.default);
+	}
+	
+	// EXPORT to common var APP
+	exports.log = _log2.default;
+	exports.Polygon = _polygon_class2.default;
+
+/***/ },
+/* 1 */,
+/* 2 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _classCallCheck2 = __webpack_require__(3);
+	
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var Polygon = function Polygon(height, width) {
+	  (0, _classCallCheck3.default)(this, Polygon);
+	
+	  this.height = height;
+	  this.width = width;
+	};
+	
+	// module.exports = Polygon;
+	
+	exports.default = Polygon;
+
+/***/ },
+/* 3 */
+/***/ function(module, exports) {
+
+	"use strict";
+	
+	exports.__esModule = true;
+	
+	exports.default = function (instance, Constructor) {
+	  if (!(instance instanceof Constructor)) {
+	    throw new TypeError("Cannot call a class as a function");
+	  }
+	};
+
+/***/ }
+]);
+//# sourceMappingURL=application.js.map
