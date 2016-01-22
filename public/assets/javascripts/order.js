@@ -1,1 +1,32 @@
-var APP=webpackJsonpAPP([1],[function(e,t,u){"use strict";function n(e){return e&&e.__esModule?e:{"default":e}}var o=u(4),a=n(o),d=u(1),l=n(d);window.$=a["default"],window.log=l["default"],t.log=l["default"]}]);
+var APP =
+webpackJsonpAPP([2],[
+/* 0 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _jquery = __webpack_require__(4);
+	
+	var _jquery2 = _interopRequireDefault(_jquery);
+	
+	var _log = __webpack_require__(1);
+	
+	var _log2 = _interopRequireDefault(_log);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	// EXPORT to Global
+	// window.$ = require('jquery');
+	window.$ = _jquery2.default;
+	
+	// EXPORT to common var APP
+	window.log = _log2.default;
+	exports.log = _log2.default;
+	
+	if (true) {
+	  (0, _log2.default)("ORDER PAGE!");
+	}
+
+/***/ }
+]);
+//# sourceMappingURL=order.js.map

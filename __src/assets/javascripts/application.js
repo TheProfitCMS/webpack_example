@@ -5,6 +5,9 @@
 import log     from './components/log';
 import Polygon from './components/polygon_class';
 
+// import about  from './components/about';
+// import orders from './components/orders';
+
 // EXPORT to Global
 window.log     = log;
 window.Polygon = Polygon;
@@ -27,6 +30,12 @@ $(function(){
     var btn     = $(e.target);
     var content = $('.js--app--content');
 
-    content.html( btn.data('route') );
+    require.ensure([], function(require){
+
+      var module_name = btn.data('module');
+      var module      = require("./components/" + module_name);
+
+      module.init();
+    })
   })
 })

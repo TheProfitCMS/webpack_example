@@ -38,6 +38,8 @@ module.exports = {
     path: __dirname + '/public/assets',
     filename: "./javascripts/[name].js",
 
+    publicPath: __dirname + '/public/assets/',
+
     libraryTarget: "var",
     library: ['APP']
   },

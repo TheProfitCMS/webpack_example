@@ -1499,3 +1499,167 @@ $(function(){
   </body>
 </html>
 ```
+
+### DELAYED SCRIPT LOADING
+
+```
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Webpack Example</title>
+    <meta charset="utf-8">
+    <script src='assets/javascripts/app-common.js' type="application/javascript"></script>
+    <script src='assets/javascripts/application.js' type="application/javascript"></script>
+  </head>
+  <body>
+    <p>WebPack example</p>
+
+    <div>
+      <button class="js--app--routing-btn" data-module="about">About Page</button>
+      <button class="js--app--routing-btn" data-module="orders">Orders Page</button>
+    </div>
+
+    <div class="js--app--content">
+      App Content
+    </div>
+
+  </body>
+</html>
+```
+
+```
+'use strict';
+
+// let log = require('./components/log');
+// let Polygon = require('./components/polygon_class');
+import log     from './components/log';
+import Polygon from './components/polygon_class';
+
+// import about  from './components/about';
+// import orders from './components/orders';
+
+// EXPORT to Global
+window.log     = log;
+window.Polygon = Polygon;
+window.$       = require('jquery');
+
+// EXPORT to common var APP
+exports.log     = log;
+exports.Polygon = Polygon;
+
+if( DEV_MODE ){
+  log("Hello World!")
+  log( Polygon )
+}
+
+// On Ready
+$(function(){
+  log("Hello World from On ready");
+
+  $('.js--app--routing-btn').on('click', function(e){
+    var btn     = $(e.target);
+    var content = $('.js--app--content');
+
+    require.ensure([], function(require){
+
+      var module_name = btn.data('module');
+      var module      = require("./components/" + module_name);
+
+      module.init();
+    })
+  })
+})
+```
+
+```
+'use strict';
+
+const NODE_ENV = process.env.NODE_ENV || 'development';
+console.log(`NODE ENV => ${ NODE_ENV }`);
+
+// $ webpack
+// $ NODE_ENV=development webpack
+const DEV_MODE = NODE_ENV == 'development';
+console.log(`DEV MODE => ${ DEV_MODE }`);
+
+// $ NODE_ENV=production webpack
+const PROD_MODE = NODE_ENV == 'production';
+console.log(`PROD MODE => ${ PROD_MODE }`);
+
+// cheap-inline-module-source-map | source-map
+const SOURCE_MAP_TYPE = DEV_MODE ? 'source-map' : null;
+
+const webpack = require('webpack');
+
+module.exports = {
+  watch: DEV_MODE,
+
+  watchOptions: {
+    aggregateTimeout: 100
+  },
+
+  devtool: SOURCE_MAP_TYPE,
+
+  // the base path which will be used to resolve entry points
+  context: __dirname + '/__src/assets',
+
+  entry: {
+    application: './javascripts/application.js',
+    order:       './javascripts/order.js'
+  },
+
+  output: {
+    path: __dirname + '/public/assets',
+    filename: "./javascripts/[name].js",
+
+    publicPath: __dirname + '/public/assets/',
+
+    libraryTarget: "var",
+    library: ['APP']
+  },
+
+  plugins: [
+    new webpack.optimize.DedupePlugin(),
+
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'app-common',
+      chanks: ['application', 'order']
+    }),
+
+    new webpack.DefinePlugin({
+      NODE_ENV: JSON.stringify(NODE_ENV),
+      DEV_MODE: DEV_MODE
+    })
+  ],
+
+  resolve: {
+    alias: {
+      jquery: __dirname + "/bower_components/jquery/dist/jquery.js"
+    }
+  },
+
+  module: {
+    loaders: [{
+      test: /\.jsx?$/,
+      exclude: /(node_modules|bower_components)/,
+      loader: 'babel',
+      query: {
+        presets: ['react', 'es2015'],
+        plugins: ['transform-runtime']
+      }
+    }]
+  }
+}
+
+// Uglify on Production mode
+
+if(PROD_MODE){
+ module.exports.plugins.push(
+  new webpack.optimize.UglifyJsPlugin({
+    compress: {
+      warnings: true
+    }
+  })
+ );
+}
+```
