@@ -30,7 +30,8 @@ module.exports = {
   context: __dirname + '/__src/assets',
 
   entry: {
-    application: './javascripts/application.js'
+    application: './javascripts/application.js',
+    order:       './javascripts/order.js'
   },
 
   output: {

@@ -1157,3 +1157,117 @@ export default Polygon;
 APP.log(1)
 new APP.Polygon(10, 20)
 ```
+
+# ORDER PAGE
+
+touch __src/assets/javascripts/order.js
+
+touch public/order.html
+
+```
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Webpack Example</title>
+    <meta charset="utf-8">
+    <script src='assets/javascripts/order.js' type="application/javascript;version=1.7"></script>
+  </head>
+  <body>
+    WebPack example :: ORDER PAGE
+  </body>
+</html>
+```
+
+```
+'use strict';
+
+import log from './components/log';
+
+// EXPORT to Global
+// EXPORT to common var APP
+window.log  = log;
+exports.log = log;
+
+if(DEV_MODE){
+  log("ORDER PAGE!")
+}
+```
+
+```
+'use strict';
+
+const NODE_ENV = process.env.NODE_ENV || 'development';
+console.log(`NODE ENV => ${ NODE_ENV }`);
+
+// $ webpack
+// $ NODE_ENV=development webpack
+const DEV_MODE = NODE_ENV == 'development';
+console.log(`DEV MODE => ${ DEV_MODE }`);
+
+// $ NODE_ENV=production webpack
+const PROD_MODE = NODE_ENV == 'production';
+console.log(`PROD MODE => ${ PROD_MODE }`);
+
+// cheap-inline-module-source-map | source-map
+const SOURCE_MAP_TYPE = DEV_MODE ? 'source-map' : null;
+
+const webpack = require('webpack');
+
+module.exports = {
+  watch: DEV_MODE,
+
+  watchOptions: {
+    aggregateTimeout: 100
+  },
+
+  devtool: SOURCE_MAP_TYPE,
+
+  // the base path which will be used to resolve entry points
+  context: __dirname + '/__src/assets',
+
+  entry: {
+    application: './javascripts/application.js',
+    order:       './javascripts/order.js'
+  },
+
+  output: {
+    path: __dirname + '/public/assets',
+    filename: "./javascripts/[name].js",
+
+    libraryTarget: "var",
+    library: ['APP']
+  },
+
+  plugins: [
+    new webpack.DefinePlugin({
+      NODE_ENV: JSON.stringify(NODE_ENV),
+      DEV_MODE: DEV_MODE
+    })
+  ],
+
+  module: {
+    loaders: [{
+      test: /\.jsx?$/,
+      exclude: /(node_modules|bower_components)/,
+      loader: 'babel',
+      query: {
+        presets: ['react', 'es2015'],
+        plugins: ['transform-runtime']
+      }
+    }]
+  }
+}
+
+// Uglify on Production mode
+
+if(PROD_MODE){
+ module.exports.plugins.push(
+  new webpack.optimize.UglifyJsPlugin({
+    compress: {
+      warnings: true
+    }
+  })
+ );
+}
+```
+
