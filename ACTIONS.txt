@@ -1437,3 +1437,65 @@ if( DEV_MODE ){
   log( Polygon )
 }
 ```
+
+### JQUERY
+
+```
+'use strict';
+
+// let log = require('./components/log');
+// let Polygon = require('./components/polygon_class');
+import log     from './components/log';
+import Polygon from './components/polygon_class';
+
+// EXPORT to Global
+window.log     = log;
+window.Polygon = Polygon;
+window.$       = require('jquery');
+
+// EXPORT to common var APP
+exports.log     = log;
+exports.Polygon = Polygon;
+
+if( DEV_MODE ){
+  log("Hello World!")
+  log( Polygon )
+}
+
+// On Ready
+$(function(){
+  log("Hello World from On ready");
+
+  $('.js--app--routing-btn').on('click', function(e){
+    var btn     = $(e.target);
+    var content = $('.js--app--content');
+
+    content.html( btn.data('route') );
+  })
+})
+```
+
+```
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Webpack Example</title>
+    <meta charset="utf-8">
+    <script src='assets/javascripts/app-common.js' type="application/javascript;version=1.7"></script>
+    <script src='assets/javascripts/application.js' type="application/javascript;version=1.7"></script>
+  </head>
+  <body>
+    <p>WebPack example</p>
+
+    <div>
+      <button class="js--app--routing-btn" data-route="/first-page">Page One</button>
+      <button class="js--app--routing-btn" data-route="/second-page">Page Two</button>
+    </div>
+
+    <div class="js--app--content">
+      App Content
+    </div>
+
+  </body>
+</html>
+```

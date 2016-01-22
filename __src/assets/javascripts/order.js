@@ -1,7 +1,7 @@
 'use strict';
 
+import $   from 'jquery';
 import log from './components/log';
-import $ from 'jquery';
 
 // EXPORT to Global
 // window.$ = require('jquery');
