@@ -36,7 +36,9 @@ module.exports = {
   output: {
     path: __dirname + '/public/assets',
     filename: "./javascripts/[name].js",
-    library: 'app'
+
+    libraryTarget: "var",
+    library: ['APP']
   },
 
   plugins: [
@@ -58,6 +60,8 @@ module.exports = {
     }]
   }
 }
+
+// Uglify on Production mode
 
 if(PROD_MODE){
  module.exports.plugins.push(

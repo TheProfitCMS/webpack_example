@@ -1,8 +1,11 @@
 'use strict';
 
-module.exports = function() {
+var log = function() {
   try {
     // debugger;
     return console.log.apply(console, arguments);
   } catch (_error) {}
 };
+
+// module.exports = log;
+export default log;

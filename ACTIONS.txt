@@ -1018,3 +1018,142 @@ if(PROD_MODE){
 ```
 
 NODE_ENV=production webpack
+
+### EXPORT CLASSES
+
+```
+'use strict';
+
+const NODE_ENV = process.env.NODE_ENV || 'development';
+console.log(`NODE ENV => ${ NODE_ENV }`);
+
+// $ webpack
+// $ NODE_ENV=development webpack
+const DEV_MODE = NODE_ENV == 'development';
+console.log(`DEV MODE => ${ DEV_MODE }`);
+
+// $ NODE_ENV=production webpack
+const PROD_MODE = NODE_ENV == 'production';
+console.log(`PROD MODE => ${ PROD_MODE }`);
+
+// cheap-inline-module-source-map | source-map
+const SOURCE_MAP_TYPE = DEV_MODE ? 'source-map' : null;
+
+const webpack = require('webpack');
+
+module.exports = {
+  watch: DEV_MODE,
+
+  watchOptions: {
+    aggregateTimeout: 100
+  },
+
+  devtool: SOURCE_MAP_TYPE,
+
+  // the base path which will be used to resolve entry points
+  context: __dirname + '/__src/assets',
+
+  entry: {
+    application: './javascripts/application.js'
+  },
+
+  output: {
+    path: __dirname + '/public/assets',
+    filename: "./javascripts/[name].js",
+
+    libraryTarget: "var",
+    library: ['APP']
+  },
+
+  plugins: [
+    new webpack.DefinePlugin({
+      NODE_ENV: JSON.stringify(NODE_ENV),
+      DEV_MODE: DEV_MODE
+    })
+  ],
+
+  module: {
+    loaders: [{
+      test: /\.jsx?$/,
+      exclude: /(node_modules|bower_components)/,
+      loader: 'babel',
+      query: {
+        presets: ['react', 'es2015'],
+        plugins: ['transform-runtime']
+      }
+    }]
+  }
+}
+
+// Uglify on Production mode
+
+if(PROD_MODE){
+ module.exports.plugins.push(
+  new webpack.optimize.UglifyJsPlugin({
+    compress: {
+      warnings: true
+    }
+  })
+ );
+}
+```
+
+```
+'use strict';
+
+// let log = require('./components/log');
+import log from './components/log';
+
+// EXPORT to Global
+window.log = log;
+
+if(DEV_MODE){
+  log("Hello World!")
+}
+
+// let Polygon = require('./components/polygon_class');
+import Polygon from './components/polygon_class';
+
+window.Polygon = Polygon;
+
+if( DEV_MODE ){
+  log( Polygon )
+}
+
+// EXPORT to common var APP
+exports.log     = log;
+exports.Polygon = Polygon;
+```
+
+```
+'use strict';
+
+var log = function() {
+  try {
+    // debugger;
+    return console.log.apply(console, arguments);
+  } catch (_error) {}
+};
+
+// module.exports = log;
+export default log;
+```
+
+```
+'use strict';
+
+class Polygon {
+  constructor(height, width) {
+    this.height = height;
+    this.width  = width;
+  }
+}
+
+// module.exports = Polygon;
+export default Polygon;
+```
+
+```
+APP.log(1)
+new APP.Polygon(10, 20)
+```
